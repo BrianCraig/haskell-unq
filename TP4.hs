@@ -38,6 +38,26 @@ reverseSAux a b = if Stack.isEmptyS a
                      then b
 					 else reverseSAux (Stack.pop a) (Stack.push (Stack.top a) b)
 
+balanceado :: String -> Bool
+balanceado a = balanceadoAux a Stack.emptyS
+
+balanceadoAux :: String -> Stack.Stack Bool -> Bool
+balanceadoAux a b = if a == ""
+					  then Stack.isEmptyS b
+					  else balanceadoAuxAux (head a) (tail a) b
+					    
+balanceadoAuxAux :: Char -> String -> Stack.Stack Bool -> Bool
+balanceadoAuxAux c s st = if c == '('
+					        then balanceadoAux s (Stack.push True st)
+					      else if c == ')'
+						    then 
+							  if Stack.isEmptyS st 
+							    then False
+							    else balanceadoAux s (Stack.pop st)
+					      else balanceadoAux s st
+
+						  
+					 
 -- Stack.top (reverseS (Stack.push 3 (Stack.push 2 (Stack.push 1 Stack.emptyS))))
 -- > 1
 
