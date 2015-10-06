@@ -1,5 +1,5 @@
 import Queue
-
+import Stack
 
 -- interfaz de usuario de Queue
 
@@ -25,3 +25,13 @@ queueToList a = if Queue.isEmptyQ a
 
 -- listToQueue l1
 -- > Q [5,4,3]
+
+
+
+-- interfaz de usuario de Stack
+
+reverseS :: Stack.Stack a -> Stack.Stack a
+reverseS a = if Stack.isEmptyS a
+               then Stack.emptyS
+               else Stack.push (Stack.top a) (reverseS (Stack.pop a))
+-- hay que probar si funciona bien, creo que termina devolviendo una instancia identica a el primer parametro
