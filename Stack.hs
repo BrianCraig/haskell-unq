@@ -10,7 +10,7 @@ isEmptyS (S []) = True
 isEmptyS _ = False
 
 push :: a -> Stack a -> Stack a
-push a (S b) = S ([a] ++ b)
+push a (S b) = S (a:b)
 
 top :: Stack a -> a
 top (S []) = error "NO HAY ELEMENTOS"

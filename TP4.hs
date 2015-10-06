@@ -31,7 +31,16 @@ queueToList a = if Queue.isEmptyQ a
 -- interfaz de usuario de Stack
 
 reverseS :: Stack.Stack a -> Stack.Stack a
-reverseS a = if Stack.isEmptyS a
-               then Stack.emptyS
-               else Stack.push (Stack.top a) (reverseS (Stack.pop a))
--- hay que probar si funciona bien, creo que termina devolviendo una instancia identica a el primer parametro
+reverseS a = reverseSAux a emptyS
+
+reverseSAux :: Stack.Stack a -> Stack.Stack a -> Stack.Stack a 
+reverseSAux a b = if Stack.isEmptyS a
+                     then b
+					 else reverseSAux (Stack.pop a) (Stack.push (Stack.top a) b)
+
+-- Stack.top (reverseS (Stack.push 3 (Stack.push 2 (Stack.push 1 Stack.emptyS))))
+-- > 1
+
+
+
+
