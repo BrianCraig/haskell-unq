@@ -21,8 +21,8 @@ printT (NodeT t1 a t2)
     = (show a) : (printSubT t1 t2)
         where
             printSubT t1 t2 =
-                ((pad "+- " "|  ") (printT t2))
-                    ++ ((pad "`- " "   ") (printT t1))
+                ((pad "D " "| ") (printT t2))
+                    ++ ((pad "I " "  ") (printT t1))
             pad first rest = zipWith (++) (first : repeat rest)
 
 printT (EmptyT)   = []

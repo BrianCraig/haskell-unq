@@ -1,4 +1,4 @@
-data Tree a = EmptyT | NodeT (Tree a) a (Tree a) deriving (Show)
+import Tree
 
 sumarT :: Tree Integer -> Integer
 sumarT EmptyT = 0

@@ -20,10 +20,10 @@ isEmptyH (H t _) = isEmptyT t
 findMinH :: Heap a -> a -- O(1)
 findMinH (H t _) = rootT t
 
-insertH :: (Ord a) => Heap a -> a -> Heap a -- O(n)
+insertH :: (Ord a) => Heap a -> a -> Heap a -- O(log n)
 insertH (H t o) x = H (agregarEn (reverse o) t x) (nextPos o)
 
-deleteH :: (Ord a) => Heap a -> Heap a
+deleteH :: (Ord a) => Heap a -> Heap a -- O(alachoten)
 deleteH (H t o) = 
   let prevO = prevPos o
   in H (borrarDe (reverse prevO) t) prevO
@@ -53,12 +53,10 @@ agregarEn (Der:xs) (NodeT t1 a t2) x =
     then NodeT t1 a (agregarEn xs t2 x)
     else NodeT t1 x (agregarEn xs t2 a)
 
-
+-- Acá viene lo feo feo feo
 
 borrarDe :: (Ord a) => Ocurrencia -> Tree a -> Tree a
-borrarDe o t =
-  let ct = quitarYReemplazar o t
-  in reordenarT ct
+borrarDe o t = reordenarT (quitarYReemplazar o t)
 
 quitarYReemplazar :: Ocurrencia -> Tree a -> Tree a
 quitarYReemplazar [] _ = EmptyT
@@ -87,4 +85,3 @@ listaAHeap [] a = a
 listaAHeap (x:xs) a = insertH (listaAHeap xs a) x  
 
 -- h1 = listaAHeap [5,6,7,-10,33,457,2,45,799,87,111,2535,-10,4] emptyH
-
